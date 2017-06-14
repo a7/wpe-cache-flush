@@ -1,0 +1,20 @@
+{
+	"name": "a7/wpe-cache-flush",
+	"description": "Programmatically flush the WP Engine Cache",
+	"type": "library",
+	"license": "UNLICENSE",
+	"version": "0.1.0",
+	"authors": [
+		{
+			"name": "A7",
+			"email": "a7@fastmail.com",
+			"homepage": "https://github.com/a7"
+		}
+	],
+	"require": {
+		"php": ">=5.5.9"
+	},
+	"autoload": {
+		"files": [ "wpe-cache-flush.php" ]
+	}
+}

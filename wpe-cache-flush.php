@@ -1,0 +1,67 @@
+<?php
+/**
+ * Plugin Name: WP Engine Cache Flush
+ * Plugin URI: https://github.org/a7/wpe-cache-flush/
+ * Description: Programmatically flush the WP Engine Cache
+ * Version: 0.1.0
+ * Author: A7
+ * Author URI: http://github.org/a7/
+ */
+
+namespace A7\WPE_Cache_Flush;
+
+add_action( 'init', function () {
+
+	$key = 'wpe-cache-flush';
+
+	if ( empty( $_GET[ $key ] ) ) {
+		return;
+	}
+
+	// Need a verification key
+	if ( ! defined( 'WPE_CACHE_FLUSH') ) {
+		return;
+	}
+
+	if ( WPE_CACHE_FLUSH !== $_GET[ $key ] ) {
+		return;
+	}
+
+	// Don't cause a fatal if there is no WpeCommon class
+	if ( class_exists( 'WpeCommon' ) ) {
+		return;
+	}
+
+	if ( function_exists( 'WpeCommon::purge_memcached' ) ) {
+		\WpeCommon::purge_memcached();
+	}
+
+	if ( function_exists( 'WpeCommon::purge_memcached' ) ) {
+		\WpeCommon::clear_maxcdn_cache();
+	}
+
+	if ( function_exists( 'WpeCommon::purge_memcached' ) ) {
+		\WpeCommon::purge_varnish_cache();
+	}
+
+	global $wp_object_cache;
+	// Check for valid cache. Sometimes this is broken -- we don't know why! -- and it crashes when we flush.
+	// If there's no cache, we don't need to flush anyway.
+	$error = '';
+
+	if ( $wp_object_cache && is_object( $wp_object_cache ) ) {
+		try {
+			wp_cache_flush();
+		} catch ( \Exception $ex ) {
+			$error = "Warning: error flushing WordPress object cache: " . $ex->getMessage();
+		}
+	}
+
+	header( "Content-Type: text/plain" );
+	header( "X-WPE-Host: " . gethostname() . " " . $_SERVER['SERVER_ADDR'] );
+
+	echo "All Caches were purged!";
+	echo $error;
+
+	exit( 0 );
+} );
