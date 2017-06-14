@@ -10,6 +10,20 @@
 
 namespace A7\WPE_Cache_Flush;
 
+function get_flush_token() {
+	$flush_token = getenv( 'WPE_CACHE_FLUSH' );
+
+	if ( ! empty( $flush_token ) ) {
+		return $flush_token;
+	}
+
+	if ( defined( 'WPE_CACHE_FLUSH' ) ) {
+		return WPE_CACHE_FLUSH;
+	}
+
+	return apply_filters( __NAMESPACE__ . '/wpe_cache_flush_token', false );
+}
+
 add_action( 'init', function () {
 
 	$key = 'wpe-cache-flush';
@@ -18,12 +32,13 @@ add_action( 'init', function () {
 		return;
 	}
 
-	// Need a verification key
-	if ( ! defined( 'WPE_CACHE_FLUSH') ) {
+	$flush_token = get_flush_token();
+
+	if ( false === $flush_token ) {
 		return;
 	}
 
-	if ( WPE_CACHE_FLUSH !== $_GET[ $key ] ) {
+	if ( $flush_token !== $_GET[ $key ] ) {
 		return;
 	}
 
