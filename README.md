@@ -3,10 +3,32 @@
 Adds a programmatic way to flush the cache on your WP Engine site.
 
 ## Setup
-To use, you must first set a private key by either:
-* set the `WPE_CACHE_FLUSH` constant in `wp-config.php`
-* add a filter to `\A7\WPE_Cache\Flush\wpe_cache_flush_token` and return the token as a string
-* set an environmental variable for `WPE_CACHE_FLUSH`
+Create a [private key](https://www.random.org/strings/?num=10&len=15&digits=on&upperalpha=on&loweralpha=on&unique=on&format=html&rnd=new).
+
+Set the private key one of three ways:
+
+### Constant
+Define the constant `WPE_CACHE_FLUSH` with they key:
+```php
+define( 'WPE_CACHE_FLUSH', $private_key );
+```
+
+### Filter
+Add a filter to `\A7\WPE_Cache_Flush\wpe_cache_flush_token` and return the token as a string
+```php
+add_filter( '\A7\WPE_Cache_Flush\wpe_cache_flush_token', function() {
+  return $private_key;
+} );
+```
+
+### Environmental Variable
+Set an environmental variable for `WPE_CACHE_FLUSH`
+```php
+putenv( 'WPE_CACHE_FLUSH=' . $private_key );
+```
 
 ## Usage
-Simply hit your site and append the query parameter `?wpe-cache-flush=%token%` where the token is the same token you specified earlier.
+Make a GET request to your site's URL with the query parameter `?wpe-cache-flush=$private_key`.
+```
+GET http://example.com/?wpe-cache-flush=$private_key
+```
