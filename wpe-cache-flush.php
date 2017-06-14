@@ -43,7 +43,7 @@ add_action( 'init', function () {
 	}
 
 	// Don't cause a fatal if there is no WpeCommon class
-	if ( class_exists( 'WpeCommon' ) ) {
+	if ( ! class_exists( 'WpeCommon' ) ) {
 		return;
 	}
 
