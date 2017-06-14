@@ -51,11 +51,11 @@ add_action( 'init', function () {
 		\WpeCommon::purge_memcached();
 	}
 
-	if ( function_exists( 'WpeCommon::purge_memcached' ) ) {
+	if ( function_exists( 'WpeCommon::clear_maxcdn_cache' ) ) {
 		\WpeCommon::clear_maxcdn_cache();
 	}
 
-	if ( function_exists( 'WpeCommon::purge_memcached' ) ) {
+	if ( function_exists( 'WpeCommon::purge_varnish_cache' ) ) {
 		\WpeCommon::purge_varnish_cache();
 	}
 
