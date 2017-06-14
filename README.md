@@ -5,7 +5,7 @@ Adds a programmatic way to flush the cache on your WP Engine site.
 ![](http://d.pr/i/ZTLqNw/G6BK1Jg8+)
 
 ## Setup
-Create a [private key](https://www.random.org/strings/?num=10&len=15&digits=on&upperalpha=on&loweralpha=on&unique=on&format=html&rnd=new).
+Create a [private key](https://www.random.org/strings/?num=10&len=20&digits=on&upperalpha=on&loweralpha=on&unique=on&format=html&rnd=new).
 
 Set the private key one of three ways:
 
