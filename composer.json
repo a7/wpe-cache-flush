@@ -3,7 +3,7 @@
 	"description": "Programmatically flush the WP Engine Cache",
 	"type": "library",
 	"license": "UNLICENSE",
-	"version": "0.2.0",
+	"version": "0.2.3",
 	"authors": [
 		{
 			"name": "A7",
