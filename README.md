@@ -12,17 +12,18 @@ Include via composer:
 composer require a7/wpe-cache-flush
 ```
 
+### Private Key
 Create a [private key](https://www.random.org/strings/?num=10&len=20&digits=on&upperalpha=on&loweralpha=on&unique=on&format=html&rnd=new).
 
 Set the private key one of three ways:
 
-### Constant
+#### Constant
 Define the constant `WPE_CACHE_FLUSH` with they key:
 ```php
 define( 'WPE_CACHE_FLUSH', $private_key );
 ```
 
-### Filter
+#### Filter
 Add a filter to `\A7\WPE_Cache_Flush\wpe_cache_flush_token` and return the token as a string
 ```php
 add_filter( '\A7\WPE_Cache_Flush\wpe_cache_flush_token', function() {
@@ -30,7 +31,7 @@ add_filter( '\A7\WPE_Cache_Flush\wpe_cache_flush_token', function() {
 } );
 ```
 
-### Environmental Variable
+#### Environmental Variable
 Set an environmental variable for `WPE_CACHE_FLUSH`
 ```php
 putenv( 'WPE_CACHE_FLUSH=' . $private_key );
