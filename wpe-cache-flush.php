@@ -3,7 +3,7 @@
  * Plugin Name: WP Engine Cache Flush
  * Plugin URI: https://github.org/a7/wpe-cache-flush/
  * Description: Programmatically flush the WP Engine Cache
- * Version: 0.1.0
+ * Version: 0.2.3
  * Author: A7
  * Author URI: http://github.org/a7/
  */
