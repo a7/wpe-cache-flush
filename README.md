@@ -1,8 +1,22 @@
 # WP Engine Cache Flush
 
-Adds a programmatic way to flush the cache on your WP Engine site.
+## Purpose
+
+### What is this?
+
+If you host on [wpengine](https://wpengine.com/) you may be familiar with their cache system, and even more likely: their 'Purge All Caches' button:
 
 ![](http://d.pr/i/ZTLqNw/G6BK1Jg8+)
+
+Unfortunately, WP Engine has not yet offered a programmatic way to purge the cache for your site (i.e. using a simple webhook).
+
+I did some digging and discovered that the functionality for the WP Engine's cache purge is all within `mu-plugins` and have combine the cache purging functionality and a simple webhook request to achieve a programmatic way to clear your site's cache (object cache AND varnish full page cache).
+
+### Why would I use this?
+
+If you deal with any sort of deployment, build, or continuous delivery system, you know how important having a programmatic way to do everything is. In this case, clearing the cache is crucial to be able to run acceptance tests and verify that the new changes have not caused any regressions.
+
+This clears the cache for sites hosted on WP Engine.
 
 ## Setup
 
