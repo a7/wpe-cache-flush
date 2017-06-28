@@ -56,3 +56,8 @@ Make a GET request to your site's URL with the query parameter `?wpe-cache-flush
 ```
 GET http://example.com/?wpe-cache-flush=$private_key
 ```
+
+You can also call the flush function directly from your code via 
+```php
+\A7\WPE_Cache_Flush\cache_flush()
+```

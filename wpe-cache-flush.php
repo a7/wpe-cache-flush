@@ -42,9 +42,26 @@ add_action( 'init', function () {
 		return;
 	}
 
+	$error = cache_flush();
+
+	header( "Content-Type: text/plain" );
+	header( "X-WPE-Host: " . gethostname() . " " . $_SERVER['SERVER_ADDR'] );
+
+	echo "All Caches were purged!";
+	echo $error;
+
+	exit( 0 );
+} );
+
+/**
+ * Allow cache flushing to be called independently of web hook
+ *
+ * @return string|bool
+ */
+function cache_flush() {
 	// Don't cause a fatal if there is no WpeCommon class
 	if ( ! class_exists( 'WpeCommon' ) ) {
-		return;
+		return false;
 	}
 
 	if ( function_exists( 'WpeCommon::purge_memcached' ) ) {
@@ -72,11 +89,5 @@ add_action( 'init', function () {
 		}
 	}
 
-	header( "Content-Type: text/plain" );
-	header( "X-WPE-Host: " . gethostname() . " " . $_SERVER['SERVER_ADDR'] );
-
-	echo "All Caches were purged!";
-	echo $error;
-
-	exit( 0 );
-} );
+	return $error;
+}
