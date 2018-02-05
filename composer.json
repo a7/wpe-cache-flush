@@ -2,8 +2,7 @@
 	"name": "a7/wpe-cache-flush",
 	"description": "Programmatically flush the WP Engine Cache",
 	"type": "library",
-	"license": "UNLICENSE",
-	"version": "0.3.0",
+	"license": "Unlicense",
 	"authors": [
 		{
 			"name": "A7",
