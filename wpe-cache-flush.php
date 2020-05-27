@@ -64,18 +64,18 @@ function cache_flush() {
 		return false;
 	}
 
-	if ( function_exists( 'WpeCommon::purge_memcached' ) ) {
+	if ( method_exists('WpeCommon', 'purge_memcached' ) ) {
 		\WpeCommon::purge_memcached();
 	}
 
-	if ( function_exists( 'WpeCommon::clear_maxcdn_cache' ) ) {
+	if ( method_exists('WpeCommon', 'clear_maxcdn_cache' ) ) {
 		\WpeCommon::clear_maxcdn_cache();
 	}
 
-	if ( function_exists( 'WpeCommon::purge_varnish_cache' ) ) {
+	if ( method_exists('WpeCommon', 'purge_varnish_cache' ) ) {
 		\WpeCommon::purge_varnish_cache();
 	}
-
+	
 	global $wp_object_cache;
 	// Check for valid cache. Sometimes this is broken -- we don't know why! -- and it crashes when we flush.
 	// If there's no cache, we don't need to flush anyway.
