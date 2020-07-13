@@ -23,35 +23,36 @@ function get_flush_token() {
 
 	return apply_filters( __NAMESPACE__ . '/wpe_cache_flush_token', false );
 }
+if (function_exists('add_action')) {
+	add_action( 'init', function () {
 
-add_action( 'init', function () {
+		$key = 'wpe-cache-flush';
 
-	$key = 'wpe-cache-flush';
+		if ( empty( $_GET[ $key ] ) ) {
+			return;
+		}
 
-	if ( empty( $_GET[ $key ] ) ) {
-		return;
-	}
+		$flush_token = get_flush_token();
 
-	$flush_token = get_flush_token();
+		if ( false === $flush_token ) {
+			return;
+		}
 
-	if ( false === $flush_token ) {
-		return;
-	}
+		if ( $flush_token !== $_GET[ $key ] ) {
+			return;
+		}
 
-	if ( $flush_token !== $_GET[ $key ] ) {
-		return;
-	}
+		$error = cache_flush();
 
-	$error = cache_flush();
+		header( "Content-Type: text/plain" );
+		header( "X-WPE-Host: " . gethostname() . " " . $_SERVER['SERVER_ADDR'] );
 
-	header( "Content-Type: text/plain" );
-	header( "X-WPE-Host: " . gethostname() . " " . $_SERVER['SERVER_ADDR'] );
+		echo "All Caches were purged!";
+		echo $error;
 
-	echo "All Caches were purged!";
-	echo $error;
-
-	exit( 0 );
-} );
+		exit( 0 );
+	} );
+}
 
 /**
  * Allow cache flushing to be called independently of web hook
